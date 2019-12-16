@@ -1,17 +1,27 @@
-name: CI
+variable "region" {
+  description = "Choose the region"
+  default     = "ap-south-1"
+  type        = string
+}
 
-on: [push]
+variable "vpc_cidr" {
+  description = "Choose cidr of vpc"
+  default     = "10.0.0.0/16"
+  type        = string
+}
 
-jobs:
-  build:
+variable web_amis {
+  default = {
+    ap-south-1 = "ami-0ce933e2ae91880d3"
+    us-east-2  = "ami-0dacb0c129b49f529"
+  }
+}
 
-    runs-on: ubuntu-latest
+variable ec2_bucket {
+  description = "The bucket for ec2 web servers"
+  default     = "javahome-5678"
+}
 
-    steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+variable "service_name" {
+  default = "ec2"
+}
